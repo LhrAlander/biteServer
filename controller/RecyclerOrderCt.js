@@ -7,7 +7,7 @@ const getUncheckedOrders = async (req, res, next) => {
 		let SID = users[OID]
 		console.log(orders)
 		io.sockets.to(SID).emit('newOrders', {
-			orders: orders.data
+			orders: orders
 		})
 		res.status(200).send('get')
 	} 
