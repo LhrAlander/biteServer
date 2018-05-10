@@ -26,7 +26,6 @@ io.on('connection', function (socket) {
   // console.log('a user connected');
   // socket.broadcast.emit('new_user', {});
   console.log('connected', socket.id)
-  global.latestId = socket.id
   socket.on('addUser', msg => {
     const { OID } = msg
     console.log(msg, OID, socket.id)
