@@ -4,6 +4,7 @@ const getUncheckedOrders = async (req, res, next) => {
 		let { needLength, OID } = req.body
 		let orders = await server.getUnCheckedOrders(needLength)
 		let SID = users[OID]
+		console.log(global.users, SID)
 		io.to(SID).emit('newOrders', {
 			orders: orders.data
 		})
