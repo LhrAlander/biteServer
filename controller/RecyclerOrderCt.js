@@ -1,6 +1,7 @@
 const server = require('../server/orderServer')
 const getUncheckedOrders = async (req, res, next) => {
 	try {
+		console.log('get')
 		let { needLength, OID } = req.body
 		let orders = await server.getUnCheckedOrders(needLength)
 		let SID = users[OID]
@@ -8,6 +9,7 @@ const getUncheckedOrders = async (req, res, next) => {
 		io.to(SID).emit('newOrders', {
 			orders: orders.data
 		})
+		res.status(200).send('get')
 	} 
 	catch (err) {
 		console.log(err)
