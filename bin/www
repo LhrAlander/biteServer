@@ -30,7 +30,7 @@ io.on('connection', function (socket) {
   socket.on('addUser', msg => {
     const { OID } = msg
     console.log(msg, OID, socket.id)
-    global.users.OID = socket.id
+    global.users[OID] = socket.id
   })
   socket.on('disconnect', function () {
     console.log('user disconnected   ', socket.id);
