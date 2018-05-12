@@ -5,11 +5,11 @@ const getUncheckedOrders = async (req, res, next) => {
 		let { needLength, OID } = req.body
 		let orders = await server.getUnCheckedOrders(needLength)
 		let SID = users[OID]
-		console.log(orders)
+		console.log('orders', orders)
+		res.status(200).send(orders)
 		io.sockets.to(SID).emit('newOrders', {
 			orders: orders
 		})
-		res.status(200).send('get')
 	} 
 	catch (err) {
 		console.log(err)

@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 const RecyclerOrders = require('./routes/RecyclerOrders')
+const UserOrders = require('./routes/UserOrders')
 
 var app = express();
 global.users = {}
@@ -19,6 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/recycler/orders', RecyclerOrders);
+app.use('/api/user/orders', UserOrders)
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
