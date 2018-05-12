@@ -27,6 +27,7 @@ const pushOrder = async (req, res, next) => {
 			console.log('无忌')
 			OKD = toIDS.wj
 		}
+		console.log(OID)
 			SID = users[OID]
 			console.log('即将发送啦', SID)
 		io.sockets.to(SID).emit('newOrders', {
