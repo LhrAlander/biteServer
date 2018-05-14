@@ -6,8 +6,8 @@ const getAllAddresses = async (req, res, next) => {
 		console.log('getAll')
 		server.getAllAddresses().then(v => {
 			console.log(v)
+			res.status(200).send(v)
 		})
-		res.status(200).send(rs)
 	} 
 	catch (err) {
 		console.log(err)
