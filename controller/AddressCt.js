@@ -4,7 +4,9 @@ const server = require('../server/addressServer')
 const getAllAddresses = async (req, res, next) => {
 	try {
 		console.log('getAll')
-		let rs = await server.getAllAddresses()
+		server.getAllAddresses().then(v => {
+			console.log(v)
+		})
 		res.status(200).send(rs)
 	} 
 	catch (err) {
