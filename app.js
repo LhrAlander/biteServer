@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 const RecyclerOrders = require('./routes/RecyclerOrders')
 const UserOrders = require('./routes/UserOrders')
+const Address = require('./routes/Address')
 
 var app = express();
 global.users = {}
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/recycler/orders', RecyclerOrders);
 app.use('/api/user/orders', UserOrders)
+app.use('/api/address', Address)
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
