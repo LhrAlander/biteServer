@@ -3,7 +3,6 @@ const server = require('../server/addressServer')
 
 const getAllAddresses = async (req, res, next) => {
 	try {
-		console.log('getAll')
 		server.getAllAddresses().then(v => {
 			console.log('get')
 			res.status(200).send(v)

@@ -22,24 +22,24 @@ app.set('port', port);
 var server = http.createServer(app);
 const io = require('socket.io')(server);
 global.io = io
-// io.on('connection', function (socket) {
-//   // console.log('a user connected');
-//   // socket.broadcast.emit('new_user', {});
-//   console.log('connected', socket.id)
-//   socket.on('addUser', msg => {
-//     const { OID } = msg
-//     console.log(msg, OID, socket.id)
-//     global.users[OID] = socket.id
-//   })
-//   socket.on('disconnect', function () {
-//     console.log('user disconnected   ', socket.id);
-//     for (k in global.users) {
-//       if (global.users[k] == socket.id) {
-//         delete global.users[k]
-//       }
-//     }
-//   });
-// });
+io.on('connection', function (socket) {
+  // console.log('a user connected');
+  // socket.broadcast.emit('new_user', {});
+  console.log('connected', socket.id)
+  socket.on('addUser', msg => {
+    const { OID } = msg
+    console.log(msg, OID, socket.id)
+    global.users[OID] = socket.id
+  })
+  socket.on('disconnect', function () {
+    console.log('user disconnected   ', socket.id);
+    for (k in global.users) {
+      if (global.users[k] == socket.id) {
+        delete global.users[k]
+      }
+    }
+  });
+});
 
 /**
  * Listen on provided port, on all network interfaces.
