@@ -8,6 +8,7 @@ const getUnCheckedOrders = num => {
 			cn.query(sql, null, (err, rs) => {
 				if (err) throw err
 				resolve(rs)
+				cn.release()
 			})
 		})
 	})
@@ -28,6 +29,7 @@ const currentOrder = orders => {
 			cn.query(sql, ids, (err, rs) => {
 				if (err) throw err
 				resolve(rs)
+				cn.release()
 			})
 		})
 	})
@@ -42,6 +44,7 @@ const completeOrder = (order, OID) => {
 			cn.query(sql, order.id, (err, rs) => {
 				if (err) throw err
 				resolve(rs)
+				cn.release()
 			})
 		})
 	})
@@ -55,6 +58,7 @@ const getCurrentOrders = OID => {
 			cn.query(sql, OID, (err, rs) => {
 				if (err) throw err
 				resolve(rs)
+				cn.release()
 			})
 		})
 	})
@@ -68,6 +72,7 @@ const addOrder = order => {
 			cn.query(sql, order, (err, rs) => {
 				if (err) throw err
 				resolve(rs)
+				cn.release()
 			})
 		})
 	})
@@ -81,6 +86,7 @@ const getAddress = id => {
 			cn.query(sql, id, (err, rs) => {
 				if (err) throw err
 				resolve(rs)
+				cn.release()
 			})
 		})
 	})

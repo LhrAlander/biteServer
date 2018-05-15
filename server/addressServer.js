@@ -8,6 +8,7 @@ const getAllAddresses = () => {
 			cn.query(sql, (err, rs) => {
 				if (err) throw err
 				resolve(rs)
+				cn.release()
 			})
 		})
 	})
