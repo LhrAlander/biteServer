@@ -36,10 +36,10 @@ const pushOrder = async (req, res, next) => {
 		let address = await server.getAddress(o.addressId)
 		console.log('add', address)
 		o.address = address[0].address
-		res.send(values)
 		io.sockets.to(SID).emit('newOrders', {
 			orders: o
 		})
+		res.send(values)
 	}
 	catch (err) {
 		console.log(err)
