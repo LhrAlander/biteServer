@@ -27,7 +27,7 @@ const pushOrder = async (req, res, next) => {
 		}
 		else {
 			console.log('无忌')
-			OKD = toIDS.wj
+			OID = toIDS.wj
 		}
 		console.log(OID)
 		SID = users[OID]
@@ -46,9 +46,22 @@ const pushOrder = async (req, res, next) => {
 	}
 }
 
+const getCompletedOrders = async (req, res, next) => {
+	try {
+		let { OID } = req.body
+		console.log(OID)
+		let os = await server.getUserCompleteOrders(OID)	
+		res.send(os)
+	} 
+	catch (err) {
+		
+	}
+}
+
 
 let c = {
-	pushOrder
+	pushOrder,
+	getCompletedOrders
 }
 
 module.exports = c

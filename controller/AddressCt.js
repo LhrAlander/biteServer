@@ -13,8 +13,20 @@ const getAllAddresses = async (req, res, next) => {
 	}
 }
 
+const addAddress = async (req, res, next) => {
+	try {
+		const address = req.body.address
+		server.addAddress(address).then(v => {
+			res.status(200).send(v)
+		})
+	} 
+	catch (err) {
+		console.log(err)
+	}
+}
 let c = {
-	getAllAddresses
+	getAllAddresses,
+	addAddress
 }
 
 module.exports = c

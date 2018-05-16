@@ -14,8 +14,23 @@ const getAllAddresses = () => {
 	})
 }
 
+const addAddress = a => {
+	return new Promise((resolve, rej) => {
+		db.getConnection((err, cn) => {
+			if (err) throw err
+			let sql = `insert into address set ?`
+			cn.query(sql, a, (err, rs) => {
+				if (err) throw err
+				resolve(rs)
+				cn.release()
+			})
+		})
+	})
+}
+
 let s = {
-	getAllAddresses
+	getAllAddresses,
+	addAddress
 }
 
 module.exports = s

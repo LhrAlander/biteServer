@@ -62,11 +62,25 @@ const changeCurrentOrders = async (req, res, next) => {
 	}
 }
 
+const getCompleteOrders = async (req, res, next) => {
+	try {
+		let { OID } = req.body
+		console.log('getc', OID)
+		let rs = await server.getCompleteOrders(OID)
+		res.status(200).send(rs)
+	} 
+	catch (err) {
+		console.log(err)
+	}
+}
+
+
 let c = {
 	getUncheckedOrders,
 	completeOrder,
 	getCurrentOrders,
-	changeCurrentOrders
+	changeCurrentOrders,
+	getCompleteOrders
 }
 
 module.exports = c

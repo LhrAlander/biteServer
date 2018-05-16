@@ -40,8 +40,8 @@ const completeOrder = (order, OID) => {
 	return new Promise((resolve, rej) => {
 		db.getConnection((err, cn) => {
 			if (err) throw err
-			let sql = `update orders set state = '已完成', toId = '${OID}' where id = ?`
-			cn.query(sql, order.id, (err, rs) => {
+			let sql = `update orders set state = '已完成', detail = ?, toId = '${OID}' where id = ?`
+			cn.query(sql, [order.detail, order.id], (err, rs) => {
 				if (err) throw err
 				resolve(rs)
 				cn.release()
@@ -55,6 +55,20 @@ const getCurrentOrders = OID => {
 		db.getConnection((err, cn) => {
 			if (err) throw err
 			let sql = `select * from orders where state = '当前订单' and toId = ?`
+			cn.query(sql, OID, (err, rs) => {
+				if (err) throw err
+				resolve(rs)
+				cn.release()
+			})
+		})
+	})
+}
+
+const getCompleteOrders = OID => {
+	return new Promise((resolve, rej) => {
+		db.getConnection((err, cn) => {
+			if (err) throw err
+			let sql = `select orders.*, address.address from orders left join address on address.id = orders.addressId where state = '已完成' and toId = ?`
 			cn.query(sql, OID, (err, rs) => {
 				if (err) throw err
 				resolve(rs)
@@ -92,13 +106,29 @@ const getAddress = id => {
 	})
 }
 
+const getUserCompleteOrders = id => {
+	return new Promise((resolve, rej) => {
+		db.getConnection((err, cn) => {
+			if (err) throw err
+			let sql = `select * from orders where fromId = ? and state = '已完成'`
+			cn.query(sql, id, (err, rs) => {
+				if (err) throw err
+				resolve(rs)
+				cn.release()
+			})
+		})
+	})
+}
+
 let s = {
 	getUnCheckedOrders,
 	currentOrder,
 	completeOrder,
 	getCurrentOrders,
 	addOrder,
-	getAddress
+	getAddress,
+	getCompleteOrders,
+	getUserCompleteOrders,
 }
 
 module.exports = s
