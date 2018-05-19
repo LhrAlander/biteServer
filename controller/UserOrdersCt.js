@@ -22,19 +22,14 @@ const pushOrder = async (req, res, next) => {
 		let SID
 		console.log(global.users)
 		if (o.fromId == fromIDS.wd) {
-			console.log('韦导')
 			OID = toIDS.lhr
 		}
 		else {
-			console.log('无忌')
 			OID = toIDS.wj
 		}
-		console.log(OID)
 		SID = users[OID]
-		console.log('即将发送啦', SID)
 		let values = await server.addOrder(o)
 		let address = await server.getAddress(o.addressId)
-		console.log('add', address)
 		o.address = address[0].address
 		io.sockets.to(SID).emit('newOrders', {
 			orders: o

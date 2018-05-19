@@ -2,7 +2,6 @@ const server = require('../server/orderServer')
 const getUncheckedOrders = async (req, res, next) => {
 	try {
 		let { needLength, OID } = req.body
-		console.log('获取待接单', needLength, OID)
 		let orders = await server.getUnCheckedOrders(needLength)
 		let _os = []
 		for (let i = 0; i < orders.length; i++) {
@@ -65,7 +64,6 @@ const changeCurrentOrders = async (req, res, next) => {
 const getCompleteOrders = async (req, res, next) => {
 	try {
 		let { OID } = req.body
-		console.log('getc', OID)
 		let rs = await server.getCompleteOrders(OID)
 		res.status(200).send(rs)
 	} 

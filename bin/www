@@ -42,6 +42,33 @@ io.on('connection', function (socket) {
   socket.on('error', function (err) {
     console.log('socket err', err)
   })
+  socket.on('checkOrder', msg => {
+    let { OID, order } = msg
+    let fromIDS = {
+			wyq: `oEwij0-ryS8R56w2xWriEFaKejiU`,
+			wd: `oEwij06p7u8GpwVw6NSk7xWZ2dIU`
+		}
+		let toIDS = {
+			wj: `oEwij06DcL-vVQlbvDqtRq9Bhzv0`,
+			lhr: `oEwij0z6VEeRMKKCN21nEaOQgThM`
+    }
+    let checkId = ''
+    let SID = ''
+    if (OID == toIDS.lhr) {
+      console.log('发送给韦导')
+      checkId = fromIDS.wd
+    }
+    else {
+      console.log('发送给wyq')
+      checkId = fromIDS.wyq
+    }
+
+    SID = users[checkId]
+    console.log('即将发送', checkId, SID)
+    io.sockets.to(SID).emit('checkOrder', {
+			order
+		})
+  })
 });
 
 /**
