@@ -62,7 +62,7 @@ io.on('connection', function (socket) {
       console.log('发送给wyq')
       checkId = fromIDS.wyq
     }
-
+    console.log('users', users)
     SID = users[checkId]
     console.log('即将发送', checkId, SID)
     io.sockets.to(SID).emit('checkOrder', {
